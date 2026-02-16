@@ -9,7 +9,12 @@ export default function TodoList({
   onToggleHide,
   onAdd,
   onToggle,
-  onDelete 
+  onDelete,
+  editingId,
+  editText,
+  onStartEdit,
+  onSaveEdit,
+  onEditChange
 }) {
   const filteredTodos = hideCompleted 
     ? todos.filter(todo => !todo.completed)
@@ -50,6 +55,11 @@ export default function TodoList({
                 todo={todo}
                 onToggle={onToggle}
                 onDelete={onDelete}
+                isEditing={editingId === todo.id}
+                editText={editText}
+                onStartEdit={onStartEdit}
+                onSaveEdit={onSaveEdit}
+                onEditChange={onEditChange}
               />
             ))
           )}

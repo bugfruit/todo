@@ -13,6 +13,8 @@ export default function Home() {
   // const [filter, setFilter] = useState('all'); // maybe use this later
   const [error, setError] = useState('');
   const [weatherErr, setWeatherErr] = useState('');
+  const [editingId, setEditingId] = useState(null);
+  const [editText, setEditText] = useState('');
 
   // grab data on load
   useEffect(() => {
@@ -64,6 +66,16 @@ export default function Home() {
     }
   }
 
+  async function handleEditTodo(id, newTitle) {
+    try {
+      await api.updateTodo(id, { title: newTitle });
+      setEditingId(null);
+      fetchTodos();
+    } catch (err) {
+      setError('failed to update todo');
+    }
+  }
+
   return (
     <main className="min-h-screen bg-gray-100 py-8 px-4">
       <div className="max-w-2xl mx-auto">
@@ -78,6 +90,14 @@ export default function Home() {
           onAdd={handleAddTodo}
           onToggle={handleToggleTodo}
           onDelete={handleDeleteTodo}
+          editingId={editingId}
+          editText={editText}
+          onStartEdit={(id, title) => {
+            setEditingId(id);
+            setEditText(title);
+          }}
+          onSaveEdit={handleEditTodo}
+          onEditChange={setEditText}
         />
       </div>
     </main>
