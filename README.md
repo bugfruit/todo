@@ -36,6 +36,16 @@ npm run dev
 
 Open and view the app on: http://localhost:3000
 
+### Testing
+
+Run the unit tests for the store:
+
+```bash
+npm test
+```
+
+This will test the core todo CRUD operations
+
 
 ## Important
 
